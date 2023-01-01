@@ -75,7 +75,7 @@ public class NioSocketServer {
                         byte[] bytes = new byte[readLength];
                         byteBuffer.get(bytes);
                         log.info("接收到客户端发送过来的消息：{}", new String(bytes));
-                    } else if(readLength == -1) {
+                    } else if (readLength == -1) {
                         // 如果读取数据返回-1，代表读取到了流的末尾
                         log.warn("客户端流读取完毕，断开连接：{}", tempClient.getRemoteAddress());
                         tempClient.close();
