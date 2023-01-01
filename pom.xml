@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.lipanre</groupId>
+    <artifactId>java-improve</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>java-feature</module>
+        <module>bom</module>
+        <module>common</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- project version  -->
+        <revision>1.0.0-SNAPSHOT</revision>
+
+        <!-- improve sub project -->
+        <!-- common version -->
+        <common.version>${revision}</common.version>
+        <!--bom version-->
+        <bom.version>${revision}</bom.version>
+
+        <!--java feature version-->
+        <java-feature.version>1.0.0-SNAPSHOT</java-feature.version>
+
+
+    </properties>
+
+
+
+
+</project>
