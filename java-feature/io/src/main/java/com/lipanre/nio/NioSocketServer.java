@@ -47,7 +47,9 @@ public class NioSocketServer {
                 // 如果没有客户端连接进来，那么返回的就是一个null
                 SocketChannel client = serverChannel.accept();
 
-                if (Objects.nonNull(client)) {
+                if (Objects.isNull(client)) {
+                    log.debug("客户端未连接：{}", System.currentTimeMillis());
+                } else {
                     // 设置客户端的socket也为非阻塞的
                     // 这样在利用客户端的socket读取数据的时候，就不会阻塞读取数据
                     client.configureBlocking(false);
