@@ -23,7 +23,6 @@ public class NioSocketServer {
 
     public static void main(String[] args) {
         int serverPort = 9999;
-
         SocketAddress serverAddress = new InetSocketAddress(serverPort);
         // Nio的socket，需要通过ServerSocketChannel.open来获取一个ServerSocketChannel对象，这样才可以设置非阻塞
         // 通过ServerSocket.getChannel获取到的结果会是null
@@ -37,19 +36,18 @@ public class NioSocketServer {
 
             List<SocketChannel> clients = new ArrayList<>();
             List<SocketChannel> needRemoveClients = new ArrayList<>();
+            ByteBuffer byteBuffer = ByteBuffer.allocateDirect(1024);
 
             while (true) {
                 // 每次循环停顿1s，防止cpu空转
-                Thread.sleep(1000);
+                Thread.sleep(500);
 
                 // 因为设置了socketChannel为非阻塞的
                 // 所以在这里accept的时候，如果有客户端连接进来就会返回连接进来的客户端的文件描述符（socket对象）
                 // 如果没有客户端连接进来，那么返回的就是一个null
                 SocketChannel client = serverChannel.accept();
 
-                if (Objects.isNull(client)) {
-                    log.info("当前没有客户端连接进来：{}", System.currentTimeMillis());
-                } else {
+                if (Objects.nonNull(client)) {
                     // 设置客户端的socket也为非阻塞的
                     // 这样在利用客户端的socket读取数据的时候，就不会阻塞读取数据
                     client.configureBlocking(false);
@@ -59,7 +57,7 @@ public class NioSocketServer {
 
                 // 读取和回复数据
                 for (SocketChannel tempClient : clients) {
-                    ByteBuffer byteBuffer = ByteBuffer.allocateDirect(1024);
+                    byteBuffer.clear();
                     int readLength = 0;
                     try {
                         readLength = tempClient.read(byteBuffer);
@@ -74,7 +72,16 @@ public class NioSocketServer {
                         byteBuffer.flip();
                         byte[] bytes = new byte[readLength];
                         byteBuffer.get(bytes);
-                        log.info("接收到客户端发送过来的消息：{}", new String(bytes));
+                        String message = new String(bytes);
+                        log.info("接收到客户端发送过来的消息：{}", message);
+
+                        // 准备往里面写内容
+                        byteBuffer.compact();
+                        byteBuffer.put(("接受到您的消息：" + message).getBytes());
+
+                        // 准备读
+                        byteBuffer.flip();
+                        tempClient.write(byteBuffer);
                     } else if (readLength == -1) {
                         // 如果读取数据返回-1，代表读取到了流的末尾
                         log.warn("客户端流读取完毕，断开连接：{}", tempClient.getRemoteAddress());
@@ -91,7 +98,5 @@ public class NioSocketServer {
         } catch (InterruptedException | IOException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 }
