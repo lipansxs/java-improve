@@ -40,7 +40,7 @@ public class NioSocketServer {
 
             while (true) {
                 // 每次循环停顿1s，防止cpu空转
-                Thread.sleep(500);
+                Thread.sleep(50);
 
                 // 因为设置了socketChannel为非阻塞的
                 // 所以在这里accept的时候，如果有客户端连接进来就会返回连接进来的客户端的文件描述符（socket对象）
