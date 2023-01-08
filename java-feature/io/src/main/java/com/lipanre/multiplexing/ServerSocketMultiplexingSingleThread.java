@@ -97,6 +97,7 @@ public class ServerSocketMultiplexingSingleThread {
         try {
             readLength = client.read(byteBuffer);
         } catch (IOException e) {
+            // 由于网络问题或客户端异常就会抛出异常
             log.error("客户端断开连接：" + client.getRemoteAddress(), e);
             client.close();
             return;
