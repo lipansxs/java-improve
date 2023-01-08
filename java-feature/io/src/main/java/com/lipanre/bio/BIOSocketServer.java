@@ -57,7 +57,8 @@ public class BIOSocketServer {
                         // 发送数据给客户端数据
                         bos.write(("服务端接收到了客户端发送过来的消息：" + clientMessage + "\n").getBytes());
                         bos.flush();
-                    } else {
+                    } else if (Objects.isNull(clientMessage)) {
+                        log.info("客户端程序关闭，断开连接");
                         break;
                     }
                 }
