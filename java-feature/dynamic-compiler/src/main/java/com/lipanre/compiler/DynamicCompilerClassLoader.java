@@ -9,9 +9,19 @@ import java.util.Objects;
 
 public class DynamicCompilerClassLoader extends URLClassLoader {
 
-    public final Map<String, ClassJavaFileObject> classFileObjectCache = new HashMap<>();
+    /**
+     * 目标类类加载器
+     */
+    private ClassLoader targetClassClassLoader;
 
-    public final Map<String, Class<?>> classCache = new HashMap<>();
+    /**
+     * 目标类class
+     */
+    private Class<?> targetClass;
+
+    private final Map<String, ClassJavaFileObject> classFileObjectCache = new HashMap<>();
+
+    private final Map<String, Class<?>> classCache = new HashMap<>();
 
     /**
      * 空数组大小
@@ -25,6 +35,7 @@ public class DynamicCompilerClassLoader extends URLClassLoader {
 
     /**
      * 创建一个自定义类加载器对象
+     *
      * @param urls
      * @param parent
      */
@@ -34,6 +45,14 @@ public class DynamicCompilerClassLoader extends URLClassLoader {
 
     public void addClassFileObject(String className, ClassJavaFileObject classJavaFileObject) {
         classFileObjectCache.put(className, classJavaFileObject);
+    }
+
+    public void setTargetClassClassLoader(ClassLoader targetClassClassLoader) {
+        this.targetClassClassLoader = targetClassClassLoader;
+    }
+
+    public void setTargetClass(Class<?> targetClass) {
+        this.targetClass = targetClass;
     }
 
     @Override
@@ -49,6 +68,10 @@ public class DynamicCompilerClassLoader extends URLClassLoader {
             Class<?> resultClass = defineClass(className, classContent, START_OFFSET, classContent.length);
             classCache.put(className, resultClass);
             return resultClass;
+        }
+
+        if (Objects.nonNull(targetClass) && Objects.equals(className, targetClass.getName())) {
+            return targetClassClassLoader.loadClass(className);
         }
 
         return super.findClass(className);

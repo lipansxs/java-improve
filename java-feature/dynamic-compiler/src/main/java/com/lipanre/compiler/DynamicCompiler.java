@@ -1,6 +1,7 @@
 package com.lipanre.compiler;
 
 
+import cn.hutool.core.util.ZipUtil;
 import com.lipanre.compiler.common.Constants;
 import com.lipanre.compiler.util.CompilerFactory;
 
@@ -20,7 +21,20 @@ public class DynamicCompiler {
      */
     private final static ClassLoader EXTENSION_CLASS_LOADER = ClassLoader.getSystemClassLoader().getParent();
 
-    private final static String JAVA_HOME_PATH = System.getProperty("java.home");
+    private static File BASE_JAR_FILE = new File("./lib/yhlz-base.jar");
+
+    @SuppressWarnings("unchecked")
+    public static <T> Class<T> compileAndLoadClass(String classFullPath,
+                                                   String sourceCode,
+                                                   List<URL> dependencies,
+                                                   Class<T> targetClass) throws ClassNotFoundException {
+        DynamicCompilerClassLoader dynamicCompilerClassLoader = compile(classFullPath, sourceCode, dependencies, targetClass);
+        if (Objects.nonNull(targetClass)) {
+            dynamicCompilerClassLoader.setTargetClass(targetClass);
+            dynamicCompilerClassLoader.setTargetClassClassLoader(targetClass.getClassLoader());
+        }
+        return (Class<T>) dynamicCompilerClassLoader.loadClass(classFullPath);
+    }
 
     /**
      * 编译源码，线程安全
@@ -29,10 +43,9 @@ public class DynamicCompiler {
      * @param dependencies 依赖包
      * @return
      */
-    public static Class<?> compile(String classFullPath,
-                                   String sourceCode,
-                                   List<URL> dependencies)
-            throws ClassNotFoundException {
+    public static <T> DynamicCompilerClassLoader compile(String classFullPath,
+                                       String sourceCode,
+                                       List<URL> dependencies, Class<?> targetClass) {
 
         // 创建一个新的java编译器
         JavaCompiler systemJavaCompiler = CompilerFactory.createCompiler();
@@ -42,8 +55,7 @@ public class DynamicCompiler {
                 systemJavaCompiler.getStandardFileManager(null, Locale.CHINA, StandardCharsets.UTF_8);
 
         // 父类加载器要用ExtClassLoader
-        CustomFileManager customFileManager = new CustomFileManager(standardFileManager,
-                dependencies, EXTENSION_CLASS_LOADER);
+        CustomFileManager customFileManager = new CustomFileManager(standardFileManager, dependencies, EXTENSION_CLASS_LOADER);
 
         // 创建待编译的JavaFileObject对象
         StringJavaFileObject stringJavaFileObject = new StringJavaFileObject(classFullPath, sourceCode);
@@ -51,15 +63,14 @@ public class DynamicCompiler {
         DiagnosticCollector<JavaFileObject> diagnosticCollector = new DiagnosticCollector<>();
 
         // 编译的时候添加依赖包扫描
-        List<String> options = getOptions(dependencies);
+        List<String> options = getOptions(dependencies, targetClass);
 
         JavaCompiler.CompilationTask task = systemJavaCompiler.getTask(null, customFileManager,
                 diagnosticCollector, options, null, Collections.singletonList(stringJavaFileObject));
 
         if (task.call()) {
-            // 编译成功后将编译成功的类的class对象返回回去
-            ClassLoader classLoader = customFileManager.getClassLoader(StandardLocation.CLASS_OUTPUT);
-            return classLoader.loadClass(classFullPath);
+            // 编译成功后将编译成功的类加载器返回回去
+            return (DynamicCompilerClassLoader) customFileManager.getClassLoader(StandardLocation.CLASS_OUTPUT);
         } else {
             // 如果编译出错，就将异常抛出去
             StringBuilder stringBuilder = new StringBuilder();
@@ -74,10 +85,11 @@ public class DynamicCompiler {
 
     /**
      * 获取操作参数
+     *
      * @param dependencies
      * @return
      */
-    private static List<String> getOptions(List<URL> dependencies) {
+    private static List<String> getOptions(List<URL> dependencies, Class<?> targetClass) {
         List<String> options = new ArrayList<>();
 
         options.add("-cp");
@@ -90,10 +102,18 @@ public class DynamicCompiler {
                 cp.append(File.pathSeparator);
             });
         }
-
-        cp.append(JAVA_HOME_PATH + "/lib/rt.jar");
+        if (!BASE_JAR_FILE.exists()) {
+            String targetClassPath = getTargetClassPath(targetClass);
+            BASE_JAR_FILE = ZipUtil.zip(BASE_JAR_FILE, targetClassPath,
+                    targetClass.getClassLoader().getResourceAsStream(targetClassPath));
+        }
+        cp.append(BASE_JAR_FILE.getAbsolutePath());
         options.add(cp.toString());
         return options;
+    }
+
+    private static String getTargetClassPath(Class<?> targetClass) {
+        return targetClass.getName().replace(".", "/") + ".class";
     }
 
 }
