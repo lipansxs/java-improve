@@ -5,10 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
-import java.nio.channels.SelectionKey;
-import java.nio.channels.Selector;
-import java.nio.channels.ServerSocketChannel;
-import java.nio.channels.SocketChannel;
+import java.nio.channels.*;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -49,10 +46,29 @@ public class ServerSocketMultiplexingMultiThread {
                         acceptHandle(key);
                     } else if (key.isReadable()) {
                         readHandle(key);
+                        key.interestOps(SelectionKey.OP_WRITE);
+                    } else if (key.isWritable()) {
+                        writeHandle(key);
+                        key.interestOps(SelectionKey.OP_READ);
                     }
                 }
             }
         }
+    }
+
+    private void writeHandle(SelectionKey key) {
+        new Thread(() -> {
+            SocketChannel socketChannel = (SocketChannel) key.channel();
+            ByteBuffer byteBuffer = (ByteBuffer) key.attachment();
+            byteBuffer.clear();
+            byteBuffer.put("Hello\n".getBytes());
+            byteBuffer.flip();
+            try {
+                socketChannel.write(byteBuffer);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
     }
 
     private void readHandle(SelectionKey key) {
@@ -76,7 +92,7 @@ public class ServerSocketMultiplexingMultiThread {
                 log.info("接收到客户端消息：{}", new String(bytes));
 
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                log.error("客户端异常断开连接：", e);
             }
 
         }).start();
