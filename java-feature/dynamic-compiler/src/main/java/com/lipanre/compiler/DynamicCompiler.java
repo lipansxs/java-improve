@@ -70,7 +70,7 @@ public class DynamicCompiler {
 
         if (task.call()) {
             // 编译成功后将编译成功的类加载器返回回去
-            return (DynamicCompilerClassLoader) customFileManager.getClassLoader(StandardLocation.CLASS_OUTPUT);
+            return (DynamicCompilerClassLoader) customFileManager.getCustomerClassLoader();
         } else {
             // 如果编译出错，就将异常抛出去
             StringBuilder stringBuilder = new StringBuilder();

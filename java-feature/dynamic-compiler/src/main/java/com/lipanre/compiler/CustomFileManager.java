@@ -26,8 +26,7 @@ public class CustomFileManager extends ForwardingJavaFileManager<StandardJavaFil
         dynamicCompilerClassLoader = new DynamicCompilerClassLoader(urls, parent);
     }
 
-    @Override
-    public ClassLoader getClassLoader(Location location) {
+    public ClassLoader getCustomerClassLoader() {
         return dynamicCompilerClassLoader;
     }
 
