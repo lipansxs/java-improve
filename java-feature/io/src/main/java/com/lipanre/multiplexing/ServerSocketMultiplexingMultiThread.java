@@ -109,6 +109,7 @@ public class ServerSocketMultiplexingMultiThread {
         SocketChannel client = server.accept();
         client.configureBlocking(false);
         client.register(this.selector, SelectionKey.OP_READ, ByteBuffer.allocateDirect(1024));
+        log.info("有一个客户端连接进来了：{}:{}", client.getLocalAddress(), client.getRemoteAddress());
     }
 
     public static void main(String[] args) throws IOException {
