@@ -8,6 +8,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.*;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * selector线程
@@ -24,9 +25,17 @@ public class SelectorThread implements Runnable{
 
     private final SelectorThreadGroup selectorThreadGroup;
 
+    private final LinkedBlockingQueue<SelectableChannel> queue;
+
+    /**
+     * 默认的byteBuffer读取大小
+     */
+    private static final int BYTEBUFFER_SIZE = 4096;
+
     public SelectorThread(SelectorThreadGroup selectorThreadGroup) throws IOException {
         this.selector = Selector.open();
         this.selectorThreadGroup = selectorThreadGroup;
+        this.queue = new LinkedBlockingQueue<>();
     }
 
     @Override
@@ -49,7 +58,13 @@ public class SelectorThread implements Runnable{
                         }
                     }
                 }
-            } catch (IOException e) {
+
+                // 判断队列中是否有元素
+                // 如果有元素代表有channel需要注册到selector上了
+                if (!this.queue.isEmpty()) {
+                    this.register();
+                }
+            } catch (IOException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }
@@ -88,18 +103,30 @@ public class SelectorThread implements Runnable{
         ServerSocketChannel server = (ServerSocketChannel) key.channel();
         SocketChannel client = server.accept();
         client.configureBlocking(false);
-        this.selectorThreadGroup.register(client, SelectionKey.OP_READ, ByteBuffer.allocateDirect(4096));
+        this.selectorThreadGroup.register(client);
     }
 
     /**
      * 往多路复用器上注册文件描述符
-     * @param channel
-     * @param selectionKey
-     * @param attachment
      * @throws ClosedChannelException
      */
-    public void register(SelectableChannel channel, int selectionKey, Object attachment) throws ClosedChannelException {
-        channel.register(this.selector, selectionKey, attachment);
+    public void register() throws ClosedChannelException, InterruptedException {
+        SelectableChannel channel = this.queue.take();
+
+        if (channel instanceof ServerSocketChannel) {
+            channel.register(this.selector, SelectionKey.OP_ACCEPT);
+        } else if (channel instanceof SocketChannel) {
+            channel.register(this.selector, SelectionKey.OP_READ, ByteBuffer.allocateDirect(BYTEBUFFER_SIZE));
+        }
+
+    }
+
+    /**
+     * 往队列里面添加一个channel
+     * @param channel
+     */
+    public void addChannel(SelectableChannel channel) {
+        this.queue.add(channel);
         this.selector.wakeup();
     }
 }

@@ -63,16 +63,12 @@ public class SelectorThreadGroup {
         serverSocketChannel.bind(new InetSocketAddress(port));
 
         // 注册到多路复用器上，监听客户端连接
-        register(serverSocketChannel, SelectionKey.OP_ACCEPT);
+        register(serverSocketChannel);
     }
 
-    public void register(SelectableChannel channel, int selectionKeyOp) throws ClosedChannelException {
-        this.register(channel, selectionKeyOp, null);
-    }
-
-    public void register(SelectableChannel channel, int selectionKeyOp, Object attachment) throws ClosedChannelException {
+    public void register(SelectableChannel channel) {
         SelectorThread selectorThread = this.getNextSelectorThread();
-        selectorThread.register(channel, selectionKeyOp, attachment);
+        selectorThread.addChannel(channel);
     }
 
     /**
