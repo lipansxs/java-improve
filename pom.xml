@@ -13,7 +13,6 @@
         <module>java-feature</module>
         <module>bom</module>
         <module>common</module>
-        <module>java-improve-test-jdk1.8</module>
     </modules>
 
     <properties>
