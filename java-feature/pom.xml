@@ -11,7 +11,6 @@
 
     <artifactId>java-feature</artifactId>
     <packaging>pom</packaging>
-    <version>${java-feature.version}</version>
 
 
     <modules>

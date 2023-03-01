@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.lipanre</groupId>
         <artifactId>java-feature</artifactId>
-        <version>${java-feature.version}</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>io</artifactId>

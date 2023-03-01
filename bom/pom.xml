@@ -6,7 +6,7 @@
 
     <groupId>com.lipanre</groupId>
     <artifactId>bom</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>${bom.version}</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -22,11 +22,13 @@
         <logback.version>1.4.5</logback.version>
         <lombok.version>1.18.24</lombok.version>
         <netty.version>4.1.49.Final</netty.version>
+        <mybatis-plus.version>3.5.2</mybatis-plus.version>
 
 
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
     </properties>
 
     <dependencyManagement>
@@ -75,9 +77,16 @@
                 <scope>test</scope>
             </dependency>
 
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
 
         </dependencies>
 
     </dependencyManagement>
+
+
 
 </project>

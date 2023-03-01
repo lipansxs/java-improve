@@ -13,6 +13,7 @@
         <module>java-feature</module>
         <module>bom</module>
         <module>common</module>
+        <module>java-framework</module>
     </modules>
 
     <properties>
@@ -23,20 +24,15 @@
         <!-- project version  -->
         <revision>1.0.0-SNAPSHOT</revision>
 
-        <!-- improve sub project -->
-        <!-- common version -->
-        <common.version>${revision}</common.version>
         <!--bom version-->
         <bom.version>${revision}</bom.version>
 
         <!--java feature version-->
         <java-feature.version>1.0.0-SNAPSHOT</java-feature.version>
 
-
     </properties>
 
     <dependencyManagement>
-
         <dependencies>
             <dependency>
                 <groupId>com.lipanre</groupId>
@@ -46,8 +42,8 @@
                 <scope>import</scope>
             </dependency>
         </dependencies>
-
     </dependencyManagement>
+
 
 
 
