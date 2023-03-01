@@ -1,0 +1,11 @@
+server:
+  port: 9880
+mybatis-plus:
+  type-aliases-package: com/lipanre/mybatisplus
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/world?useSSL=false&serverTimezone=UTC
+    username: root
+    password: lipanre
