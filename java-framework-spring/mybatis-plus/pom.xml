@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.lipanre</groupId>
-        <artifactId>java-framework</artifactId>
+        <artifactId>java-framework-spring</artifactId>
         <version>${revision}</version>
     </parent>
 

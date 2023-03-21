@@ -5,15 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.lipanre</groupId>
-        <artifactId>java-improve</artifactId>
+        <artifactId>template-engine</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>java-framework</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>template-engine</module>
-    </modules>
+    <artifactId>velocity</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

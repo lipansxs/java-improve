@@ -5,15 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.lipanre</groupId>
-        <artifactId>java-improve</artifactId>
+        <artifactId>java-framework-spring</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>java-framework</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>template-engine</module>
-    </modules>
+    <artifactId>springboot</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

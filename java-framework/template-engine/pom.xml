@@ -5,12 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.lipanre</groupId>
-        <artifactId>java-improve</artifactId>
+        <artifactId>java-framework</artifactId>
         <version>${revision}</version>
-        <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>template-enginee</artifactId>
+    <artifactId>template-engine</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>velocity</module>
+        <module>freemarker</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
