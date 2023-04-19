@@ -65,7 +65,8 @@ public class SelectorThread implements Runnable{
                     this.register();
                 }
             } catch (IOException | InterruptedException e) {
-                throw new RuntimeException(e);
+                log.error("io multi select error: ", e);
+                break;
             }
         }
     }
