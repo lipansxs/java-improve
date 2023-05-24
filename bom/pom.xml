@@ -25,6 +25,9 @@
         <mybatis-plus.version>3.5.2</mybatis-plus.version>
         <velocity.version>2.3</velocity.version>
         <mysql-connector.version>8.0.32</mysql-connector.version>
+        <spoon.version>10.3.0</spoon.version>
+        <log4j.version>1.2.17</log4j.version>
+        <qdox.version>2.0.3</qdox.version>
 
         <maven.compiler.target>17</maven.compiler.target>
         <maven.compiler.target>17</maven.compiler.target>
@@ -97,6 +100,26 @@
                 <version>${velocity.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>fr.inria.gforge.spoon</groupId>
+                <artifactId>spoon-core</artifactId>
+                <!-- See rendered release value at http://spoon.gforge.inria.fr/ -->
+                <version>${spoon.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.thoughtworks.qdox/qdox -->
+            <dependency>
+                <groupId>com.thoughtworks.qdox</groupId>
+                <artifactId>qdox</artifactId>
+                <version>${qdox.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
 
 
             <dependency>

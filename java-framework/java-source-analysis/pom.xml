@@ -5,21 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.lipanre</groupId>
-        <artifactId>java-improve</artifactId>
-        <version>${revision}</version>
+        <artifactId>java-framework</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>java-framework</artifactId>
+    <artifactId>java-source-analysis</artifactId>
     <packaging>pom</packaging>
-    <modules>
-        <module>template-engine</module>
-        <module>java-source-analysis</module>
-        <module>java-source-analysis/spoon</module>
-        <module>java-source-analysis/qdox</module>
-    </modules>
 
     <properties>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
