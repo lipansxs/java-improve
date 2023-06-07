@@ -1,0 +1,164 @@
+{
+  "components": {
+    "schemas": {
+      "TestQuery_request": {
+        "properties": {
+          "name": {
+            "format": "string",
+            "description": "姓名",
+            "type": "string"
+          },
+          "age": {
+            "format": "int32",
+            "description": "年龄",
+            "type": "integer",
+            "example": "0"
+          }
+        }
+      },
+      "string": {
+        "format": "string",
+        "type": "string"
+      },
+      "TestEntity_response": {
+        "properties": {
+          "name": {
+            "format": "string",
+            "description": "用户名",
+            "type": "string",
+            "example": ""
+          },
+          "age": {
+            "format": "int32",
+            "description": "年龄",
+            "type": "integer",
+            "example": "0"
+          },
+          "sex": {
+            "format": "enum",
+            "description": "性别<br/>(See: 性别枚举)",
+            "type": "string",
+            "example": "MAN"
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": ""
+    }
+  ],
+  "openapi": "3.0.3",
+  "paths": {
+    "/test/{dataId}": {
+      "get": {
+        "summary": "测试通过id获取数据",
+        "deprecated": false,
+        "description": "测试通过id获取数据",
+        "tags": [
+          "测试controller"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "json": {
+                    "summary": "test data",
+                    "value": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "test-{dataId}-GET",
+        "parameters": [
+          {
+            "schema": {
+              "format": "integer",
+              "type": "string"
+            },
+            "in": "path",
+            "description": "数据id",
+            "required": true,
+            "name": "dataId"
+          }
+        ]
+      }
+    },
+    "/test": {
+      "get": {
+        "summary": "获取用户实体对象",
+        "deprecated": false,
+        "description": "获取用户实体对象",
+        "tags": [
+          "测试controller"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TestEntity_response"
+                },
+                "examples": {
+                  "json": {
+                    "summary": "test data",
+                    "value": "{\n  \"name\": \"\",\n  \"age\": 0,\n  \"sex\": \"MAN\"\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "test-GET",
+        "parameters": []
+      }
+    },
+    "/test/get": {
+      "get": {
+        "summary": "查询数据",
+        "deprecated": false,
+        "description": "查询数据",
+        "tags": [
+          "测试controller"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {},
+                "examples": {
+                  "json": {
+                    "summary": "test data",
+                    "value": "Return void."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "test-get-GET",
+        "parameters": []
+      }
+    }
+  },
+  "info": {
+    "title": "测试",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "测试controller",
+      "description": "测试controller"
+    }
+  ]
+}

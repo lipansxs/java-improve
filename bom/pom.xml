@@ -28,6 +28,7 @@
         <spoon.version>10.3.0</spoon.version>
         <log4j.version>1.2.17</log4j.version>
         <qdox.version>2.0.3</qdox.version>
+        <hutool.version>5.8.11</hutool.version>
 
         <maven.compiler.target>17</maven.compiler.target>
         <maven.compiler.target>17</maven.compiler.target>
@@ -126,6 +127,12 @@
                 <groupId>com.mysql</groupId>
                 <artifactId>mysql-connector-j</artifactId>
                 <version>${mysql-connector.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
             </dependency>
 
         </dependencies>
