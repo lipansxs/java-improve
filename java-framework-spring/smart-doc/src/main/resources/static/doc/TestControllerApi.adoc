@@ -1,0 +1,38 @@
+
+== 测试controller
+=== 测试通过id获取数据
+*URL:* `/test/{dataId}`
+
+*Type:* `GET`
+
+*Author:* lipanre
+
+*Content-Type:* `application/x-www-form-urlencoded;charset=UTF-8`
+
+*Description:* 测试通过id获取数据
+
+
+
+*Path-parameters:*
+
+[width="100%",options="header"]
+[stripes=even]
+|====================
+|Parameter | Type|Required|Description|Since
+|dataId|string|true|数据id|-
+|====================
+
+
+
+
+*Request-example:*
+----
+curl -X GET -i /test/
+----
+
+
+*Response-example:*
+----
+string
+----
+

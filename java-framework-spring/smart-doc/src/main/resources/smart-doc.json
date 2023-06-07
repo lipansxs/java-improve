@@ -1,0 +1,12 @@
+{
+  "outPath": "src/main/resources/static/doc",
+  "style": "atelier-forest-light",
+  "dataDictionaries": [
+    {
+      "title": "性别枚举",
+      "enumClassName":"com.lipanre.enums.SEX",
+      "codeField": "name()",
+      "descField": "name()"
+    }
+  ]
+}

@@ -37,6 +37,7 @@ public class Main {
         TypeResolver typeResolver = TypeResolver.byPackageName(javaSource.getPackageName(), javaSource.getJavaClassLibrary(), javaSource.getImports());
         interfaces.add(new DefaultJavaParameterizedType("com.lipanre.xxx.IInterpreter", "IInterpreter", 0,  typeResolver));
         interfaces.add(new DefaultJavaParameterizedType("com.lipanre.xxx.IInterpreter2", "IInterpreter2", 0,  typeResolver));
+        interfaces.add(new DefaultJavaParameterizedType("com.lipanre.xxx.IInterpreter2", "IInterpreter2", 0,  typeResolver));
         ((DefaultJavaClass) javaSource.getClasses().get(0)).setImplementz(interfaces);
 
         System.out.println(javaSource.getPackageName());

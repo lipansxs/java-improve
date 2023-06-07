@@ -18,6 +18,10 @@
     <modules>
         <module>mybatis-plus</module>
         <module>springboot</module>
+        <module>smart-doc</module>
+        <module>coutom-enable</module>
+        <module>coutom-enable/controller-log-spring-boot-starter</module>
+        <module>coutom-enable/test-custom-annotation</module>
     </modules>
 
     <properties>
