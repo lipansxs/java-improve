@@ -5,29 +5,31 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.lipanre</groupId>
-        <artifactId>java-improve</artifactId>
+        <artifactId>java-feature</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>java-feature</artifactId>
-    <packaging>pom</packaging>
-
-
-    <modules>
-        <module>dynamic-compiler</module>
-        <module>io</module>
-        <module>common-feature</module>
-    </modules>
+    <groupId>com.runjian.rundo.iot.agent</groupId>
+    <artifactId>common-feature</artifactId>
 
     <properties>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
 
-    </dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
 
+        <dependency>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2</artifactId>
+        </dependency>
+
+    </dependencies>
 
 </project>
