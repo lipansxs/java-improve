@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <include>
 
-    <property name="pattern"
-              value="%highlight(%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level) %green(%logger{36}).%green(%M)-%green(%line) - %msg%n"/>
+    <property name="pattern" value="%highlight(%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level) %green(%logger{36}):%green(%line) - %msg%n %highlight(%-6level)"/>
+<!--    <property name="pattern" value="%highlight(%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level) %green(%logger{36}).%green(%M)-%green(%line) - %msg%n"/>-->
 
     <!--控制台日志， 控制台输出 -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
