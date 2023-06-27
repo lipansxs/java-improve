@@ -19,6 +19,8 @@
         <module>sofa</module>
         <module>pf4j</module>
         <module>archunit</module>
+        <module>ttl</module>
+        <module>netty</module>
     </modules>
 
     <properties>

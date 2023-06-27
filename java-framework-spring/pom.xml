@@ -22,6 +22,7 @@
         <module>coutom-enable</module>
         <module>coutom-enable/controller-log-spring-boot-starter</module>
         <module>coutom-enable/test-custom-annotation</module>
+        <module>aspect</module>
     </modules>
 
     <properties>
