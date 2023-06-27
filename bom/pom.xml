@@ -29,11 +29,13 @@
         <log4j.version>1.2.17</log4j.version>
         <qdox.version>2.0.3</qdox.version>
         <hutool.version>5.8.11</hutool.version>
+        <ttl.version>2.14.2</ttl.version>
 
         <maven.compiler.target>17</maven.compiler.target>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+        <fastjson2.version>2.0.34.1.android4</fastjson2.version>
     </properties>
 
     <dependencyManagement>
@@ -134,6 +136,20 @@
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>transmittable-thread-local</artifactId>
+                <version>${ttl.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.alibaba.fastjson2/fastjson2 -->
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson2.version}</version>
+            </dependency>
+
 
         </dependencies>
 
