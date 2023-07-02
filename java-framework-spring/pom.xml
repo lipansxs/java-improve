@@ -20,14 +20,11 @@
         <module>springboot</module>
         <module>smart-doc</module>
         <module>coutom-enable</module>
-        <module>coutom-enable/controller-log-spring-boot-starter</module>
-        <module>coutom-enable/test-custom-annotation</module>
         <module>aspect</module>
     </modules>
 
     <properties>
-        <maven.compiler.target>17</maven.compiler.target>
-        <maven.compiler.target>17</maven.compiler.target>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!--plugin version-->
@@ -86,15 +83,12 @@
         </pluginManagement>
 
         <plugins>
+            <!--用户处理revision的插件-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
             </plugin>
 
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
         </plugins>
     </build>
 

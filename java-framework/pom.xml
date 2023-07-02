@@ -14,18 +14,16 @@
     <modules>
         <module>template-engine</module>
         <module>java-source-analysis</module>
-        <module>java-source-analysis/spoon</module>
-        <module>java-source-analysis/qdox</module>
         <module>sofa</module>
         <module>pf4j</module>
         <module>archunit</module>
         <module>ttl</module>
         <module>netty</module>
+        <module>snakeyaml</module>
     </modules>
 
     <properties>
-        <maven.compiler.target>17</maven.compiler.target>
-        <maven.compiler.target>17</maven.compiler.target>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
