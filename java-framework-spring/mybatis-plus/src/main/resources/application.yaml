@@ -2,6 +2,8 @@ server:
   port: 9880
 mybatis-plus:
   type-aliases-package: com/lipanre/mybatisplus
+  configuration:
+    map-underscore-to-camel-case: off
 
 spring:
   datasource:
@@ -9,3 +11,6 @@ spring:
     url: jdbc:mysql://localhost:3306/world?useSSL=false&serverTimezone=UTC
     username: root
     password: lipanre
+logging:
+  level:
+    com.lipanre: debug
