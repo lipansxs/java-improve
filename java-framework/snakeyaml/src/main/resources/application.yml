@@ -1,0 +1,9 @@
+!!com.lipanre.snakeyaml.entity.Person
+name: "John"
+age: 20
+
+---
+!!com.lipanre.snakeyaml.entity.Student
+name: Jon
+age: 18
+level: g
