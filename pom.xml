@@ -15,6 +15,7 @@
         <module>common</module>
         <module>java-framework-spring</module>
         <module>java-framework</module>
+        <module>java-framework/axon</module>
     </modules>
 
     <properties>
