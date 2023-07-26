@@ -36,6 +36,7 @@
 
         <fastjson2.version>2.0.34.1.android4</fastjson2.version>
         <snakeyaml.version>2.0</snakeyaml.version>
+        <disruptor.version>4.0.0.RC1</disruptor.version>
     </properties>
 
     <dependencyManagement>
@@ -154,6 +155,12 @@
                 <groupId>org.yaml</groupId>
                 <artifactId>snakeyaml</artifactId>
                 <version>${snakeyaml.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.lmax</groupId>
+                <artifactId>disruptor</artifactId>
+                <version>${disruptor.version}</version>
             </dependency>
 
 
