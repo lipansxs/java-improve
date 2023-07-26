@@ -20,6 +20,8 @@
         <module>ttl</module>
         <module>netty</module>
         <module>snakeyaml</module>
+        <module>sync-tools</module>
+        <module>disruptor</module>
     </modules>
 
     <properties>
