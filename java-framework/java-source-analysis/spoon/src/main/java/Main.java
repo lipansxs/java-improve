@@ -28,19 +28,10 @@ public class Main {
         iInterpreter.setSimpleName("IInterpreter");
 
         CtModel ctModel = launcher.buildModel();
-
-
-        assert resourceUrl != null;
         String code = FileUtils.readFileToString(new File(resourceUrl.getPath()), "utf8");
-
         CtClass<?> ctClass = Launcher.parseClass(code);
         ctClass.addSuperInterface(iInterpreter);
-
-
         System.out.println(ctClass);
-
-
-
     }
 
 }
