@@ -22,6 +22,7 @@
         <module>snakeyaml</module>
         <module>sync-tools</module>
         <module>disruptor</module>
+        <module>axon</module>
     </modules>
 
     <properties>
